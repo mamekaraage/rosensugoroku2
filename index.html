@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>桃鉄風すごろく</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background-color: #98FB98;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      color: #FF4500;
+      padding: 10px;
+      font-size: 18px;
+    }
+
+    .dice-container {
+      margin: 10px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #rollDice {
+      padding: 10px 15px;
+      font-size: 14px;
+      background-color: #FF4500;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #rollDice:hover {
+      background-color: #FF6347;
+    }
+
+    #diceResult {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 5px;
+      padding: 10px;
+      max-width: 100%;
+      margin: auto;
+      box-sizing: border-box;
+    }
+
+    .cell {
+      background-color: #87CEEB;
+      border: 2px solid #000;
+      height: 40px;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 10px;
+    }
+
+    .cell.start {
+      background-color: #FFD700;
+    }
+
+    .cell.goal {
+      background-color: #FFD700;
+    }
+
+    .cell.active {
+      background-color: #FF69B4; /* ピンク色 */
+      border: 3px solid #FF1493; /* 太い枠 */
+    }
+
+    .track {
+      background-color: #8B4513;
+      height: 10px;
+      width: 100%;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>第2回路線すごろく</h1>
+  <div class="dice-container">
+    <button id="rollDice">サイコロを振る</button>
+    <p id="diceResult">結果: -</p>
+  </div>
+  <div class="board" id="board">
+    <div class="cell start" data-index="0">スタート</div>
+    <div class="track"></div>
+    <div class="cell" data-index="1">小田原</div>
+    <div class="track"></div>
+    <div class="cell" data-index="2">螢田</div>
+    <div class="track"></div>
+    <div class="cell" data-index="3">足柄</div>
+    <div class="track"></div>
+    <div class="cell" data-index="4">富水</div>
+    <div class="track"></div>
+    <div class="cell" data-index="5">栢山</div>
+    <div class="track"></div>
+    <div class="cell" data-index="6">開成</div>
+    <div class="track"></div>
+    <div class="cell" data-index="7">新松田</div>
+    <div class="track"></div>
+    <div class="cell" data-index="8">渋沢</div>
+    <div class="track"></div>
+    <div class="cell" data-index="9">秦野</div>
+    <div class="track"></div>
+    <div class="cell" data-index="10">東海大学前</div>
+    <div class="track"></div>
+    <div class="cell" data-index="11">鶴巻温泉</div>
+    <div class="track"></div>
+    <div class="cell" data-index="12">伊勢原</div>
+    <div class="track"></div>
+    <div class="cell" data-index="13">愛甲石田</div>
+    <div class="track"></div>
+    <div class="cell" data-index="14">本厚木</div>
+    <div class="track"></div>
+    <div class="cell" data-index="15">厚木</div>
+    <div class="track"></div>
+    <div class="cell" data-index="16">海老名</div>
+    <div class="track"></div>
+    <div class="cell" data-index="17">座間</div>
+    <div class="track"></div>
+    <div class="cell" data-index="18">相武台前</div>
+    <div class="track"></div>
+    <div class="cell" data-index="19">小田急相模原</div>
+    <div class="track"></div>
+    <div class="cell" data-index="20">相模大野</div>
+    <div class="track"></div>
+    <div class="cell" data-index="21">町田</div>
+    <div class="track"></div>
+    <div class="cell" data-index="22">玉川学園前</div>
+    <div class="track"></div>
+    <div class="cell" data-index="23">鶴川</div>
+    <div class="track"></div>
+    <div class="cell" data-index="24">柿生</div>
+    <div class="track"></div>
+    <div class="cell" data-index="25">新百合ヶ丘</div>
+    <div class="track"></div>
+    <div class="cell" data-index="26">百合ヶ丘</div>
+    <div class="track"></div>
+    <div class="cell" data-index="27">読売ランド前</div>
+    <div class="track"></div>
+    <div class="cell" data-index="28">生田</div>
+    <div class="track"></div>
+    <div class="cell" data-index="29">向ヶ丘遊園</div>
+    <div class="track"></div>
+    <div class="cell" data-index="30">登戸</div>
+    <div class="track"></div>
+    <div class="cell" data-index="31">和泉多摩川</div>
+    <div class="track"></div>
+    <div class="cell" data-index="32">狛江</div>
+    <div class="track"></div>
+    <div class="cell" data-index="33">喜多見</div>
+    <div class="track"></div>
+    <div class="cell" data-index="34">成城学園前</div>
+    <div class="track"></div>
+    <div class="cell" data-index="35">祖師ヶ谷大蔵</div>
+    <div class="track"></div>
+    <div class="cell" data-index="36">千歳船橋</div>
+    <div class="track"></div>
+    <div class="cell" data-index="37">経堂</div>
+    <div class="track"></div>
+    <div class="cell" data-index="38">豪徳寺</div>
+    <div class="track"></div>
+    <div class="cell" data-index="39">梅ヶ丘</div>
+    <div class="track"></div>
+    <div class="cell" data-index="40">世田谷代田</div>
+    <div class="track"></div>
+    <div class="cell" data-index="41">下北沢</div>
+    <div class="track"></div>
+    <div class="cell" data-index="42">東北沢</div>
+    <div class="track"></div>
+    <div class="cell" data-index="43">代々木上原</div>
+    <div class="track"></div>
+    <div class="cell" data-index="44">代々木八幡</div>
+    <div class="track"></div>
+    <div class="cell" data-index="45">参宮橋</div>
+    <div class="track"></div>
+    <div class="cell" data-index="46">南新宿</div>
+    <div class="track"></div>
+    <div class="cell goal" data-index="47">新宿</div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const rollDiceButton = document.getElementById("rollDice");
+      const diceResult = document.getElementById("diceResult");
+      const cells = document.querySelectorAll(".cell");
+      let currentPosition = 0;
+
+      // 初期位置をピンク色に
+      cells[currentPosition].classList.add("active");
+
+      rollDiceButton.addEventListener("click", () => {
+        let counter = 0;
+        const interval = setInterval(() => {
+          const randomRoll = Math.floor(Math.random() * 6) + 1;
+          diceResult.textContent = `運命のダイスロール: ${randomRoll}`;
+          counter++;
+
+          if (counter === 20) { // 約5秒後に結果を表示
+            clearInterval(interval);
+
+            // サイコロの最終結果を計算
+            const finalRoll = Math.floor(Math.random() * 6) + 1;
+            diceResult.textContent = `結果: ${finalRoll}`;
+
+            // 現在の位置の強調を解除
+            cells[currentPosition].classList.remove("active");
+
+            // 新しい位置を計算
+            const newPosition = currentPosition + finalRoll;
+
+            if (newPosition >= cells.length - 1) {
+              // ゴール到着処理
+              currentPosition = cells.length - 1; // ゴールの位置に固定
+              diceResult.textContent = "おめでとう！ゴールに到着しました！🎉";
+            } else {
+              // 通常の移動処理
+              currentPosition = newPosition;
+            }
+
+            // 新しい位置を強調
+            cells[currentPosition].classList.add("active");
+          }
+        }, 210); // サイコロの出目が210msごとに切り替わる
+      });
+    });
+  </script>
+</body>
+</html>

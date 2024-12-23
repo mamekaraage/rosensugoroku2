@@ -1,0 +1,79 @@
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-color: #98FB98; /* 山の色をイメージした緑色の背景 */
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    color: #FF4500;
+    padding: 20px;
+  }
+  
+  .dice-container {
+    margin: 20px 0;
+  }
+  
+  #rollDice {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #FF4500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #rollDice:hover {
+    background-color: #FF6347;
+  }
+  
+  #diceResult {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr); /* 8列に設定 */
+    gap: 5px;
+    padding: 20px;
+    max-width: 90%;
+    margin: auto;
+  }
+  
+  .cell {
+    background-color: #87CEEB; /* マスの背景を青色に */
+    border: 2px solid #000;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 10px;
+  }
+  
+  .cell.start {
+    background-color: #FFD700; /* スタートの背景を黄色に */
+  }
+  
+  .cell.goal {
+    background-color: #FFD700; /* ゴールの背景も黄色に */
+  }
+  
+  .cell.active {
+    border: 4px solid #FF4500; /* 選択中のマスを太枠で強調 */
+    box-shadow: 0 0 10px #FF4500; /* 発光する効果 */
+  }
+  
+  .track {
+    background-color: #8B4513; /* 線路を茶色で表現 */
+    height: 6px;
+    width: 100%;
+    margin: auto;
+  }
+  
